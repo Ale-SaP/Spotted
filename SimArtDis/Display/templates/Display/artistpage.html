@@ -1,0 +1,46 @@
+{% extends 'Display/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Spotted{% endblock %}
+
+{% block content %}
+
+{% if content %}
+{% include './includes/searchbar-for-nested.html' %}
+<div>
+    <div class="center">
+        <div class="originalArtist">
+            <a href=" {{ original.profilePic }} ">
+                <img src=" {{ original.profilePic }}" alt="">
+            </a>
+            <a href=" {{ original.link }} ">
+                <h1>{{ original.name }}</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="center">
+        <!-- Actual content -->
+        <div class="container">
+
+            <!-- For each webpage in content -->
+            {% for artist in content %}
+
+            <div class="block">
+                <div class="searchResults">
+                    {% for track in artist.tracks %}
+                        <iframe style="border-radius:12px" src="{{ track.embed }}" width="100%" 
+                        height="80" frameBorder="0" allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

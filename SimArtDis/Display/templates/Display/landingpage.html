@@ -1,0 +1,20 @@
+{% extends 'Display/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Spotted{% endblock %}
+
+{% block content %}
+
+<style>    
+    .full-page-span {
+    margin-top: 5%;
+    height: 85vh; }
+</style>
+<div class="full-page-span">
+    <div class="center">
+        {% include './includes/searchbar.html' %}
+    </div>
+</div>
+
+{% endblock %}
