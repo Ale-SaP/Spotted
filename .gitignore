@@ -1,0 +1,8 @@
+.cache
+.env
+
+display/__pycache__
+api/__pycache__
+Spotted/__pycache__
+
+display/migrations
