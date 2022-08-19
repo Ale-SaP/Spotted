@@ -1,18 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider} from 'react-query'
+
+//Components 
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 //Redux
-import { Provider } from 'react-redux';
-import {store} from './redux/store'
+//import { Provider } from 'react-redux';
+//import {store} from './redux/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient()
+
 root.render(
-    <Provider store={store} >
-        <App />
-    </Provider>
+        <QueryClientProvider client={queryClient}>
+                <App />
+        </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

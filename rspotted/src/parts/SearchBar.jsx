@@ -1,34 +1,30 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { logSearch } from '../redux/searchRedux/searchSlice';
-import { callApiId } from '../utils/methods';
 
+import {useNavigate} from 'react-router-dom'
 
-
-function SearchBar() {
-    //Basically, search term is updated every time it changes, but only on submit it is parsed through handleSubmit
+function SearchBar( ) {
 
     const [searchTerm, setSearch] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
-    const handleSubmit = async (e)=> {
-        e.preventDefault();
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setSearch(value);
+    };
 
-        //This makes the request to the api with the search term
-        const a = await callApiId(searchTerm);
-
-        //Dispatch is almost like the set function of a useState, in the way that we set a constant only by passing an argument through a function
-        dispatch(logSearch(a));  
+    const handleSubmit = (e) => {
+        navigate("/search/"+searchTerm)
     }
 
+    console.log("search bar loaded!")
     return (
         <div className="form-control">
             <div className="input-group">
-                <form action="" method="GET" className="center" onSubmit={handleSubmit} >
-                    <input id="artist-search" type="text" name="artist" placeholder="search here..." 
-                    className='input input-bordered'
-                    value={searchTerm} onChange={(e) => setSearch(e.target.value)} />
-                    <input className = "btn btn-square" type="submit" value="OK" />
+                <form method="GET" className="center" onSubmit={handleSubmit} >
+                    <input id="artist-search" type="text" name="" placeholder="search here..."
+                        className='input input-bordered'
+                        value={searchTerm} onChange={handleChange} />
+                    <input className="btn btn-square" type="submit" value="OK" />
                 </form>
             </div>
         </div>
