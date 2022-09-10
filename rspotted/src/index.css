@@ -8,10 +8,6 @@ body {
   background: #121212;
 }
 
-.distance {
-  padding-bottom: 20%;
-}
-
 /* Icon and search bar */
   .main-icon-div {
     background-color: #212121;
@@ -22,11 +18,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  display: inline-block;
 }
 
+.distance {
+  margin-bottom: 1.5%;
+  margin-top: 1.5%;
+}
 
 /* Artist texts and images */
-.artist-name {
+.any-artist-text {
 font-family: "Trebuchet MS", Helvetica, sans-serif;
 font-size: 31px;
 word-spacing: -1.6px;
@@ -34,40 +35,12 @@ color: #000000;
 font-weight: 400;
 text-decoration: rgb(68, 68, 68);
 background: #ffffff;
-padding: 2%;
-margin-bottom: 0%;
+padding: 1%;
 }
 
-.any-artist {
-  margin: 3% 0% 3% 0%;
-  display: inline;
-  content: center;
-  text-align: center;
-}
-
-.any-artist img {
+.any-artist-img {
   max-width: 500px;
   min-width: 200px;
-}
-
-/* ----
-  .block has the real content of the page, each square of the grid is defined generically, oposite to the previous classes
-  .block a elements define interactions with the hyperlinks
----- */
-
-.block {
-  min-height: 400px;
-  max-height: 40%;
-  overflow: auto;
-  border: none;
-  font: normal 16px/1 arial, Geneva, sans-serif;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  background: #212121;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
-  display: block;
-  max-width: 40%;
-  min-width: 20%;
 }
 
 .block a:link { text-decoration: none }

@@ -1,4 +1,4 @@
-function RelatedArtist({artist, keyProp}) {
+function RelatedArtist({artist}) {
     
     const tracks = () => {artist["tracks"].map(
         track => { return (
@@ -11,19 +11,15 @@ function RelatedArtist({artist, keyProp}) {
                         ) } ) }
 
     return (
-                <div className="any-artist card w-96 bg-base-100 shadow-xl" key={keyProp}>
-                    <div className="card-body">
-                        <div className="card-title artist-name">
-                            <h2> 
+                <div className="card">
+                    <div className="card-body any-artist">
+                            <h2 className="card-title artist-name"> 
                                 {artist["artistName"]} 
                             </h2>
-                        </div>
-                        <figure>
-                            <button onClick={() => {console.log("flipped!")}}>
+                            <figure>
                                 <img src={artist["profilePic"]} alt="Whoops, an error ocurred!" />
-                            </button>
-                        </figure>
-                    </div>        
+                            </figure>
+                    </div>    
                 </div>
 ) }
 

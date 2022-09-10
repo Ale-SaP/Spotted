@@ -1,11 +1,12 @@
 //Main imports
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 //Components
 import MainArtist from "./MainArtist"
 import RelatedArtist from "./RelatedArtists";
+import AnyArtist from './AnyArtist';
 
 const callApi = async (call) => {
     const dataFromApi = await axios.get(`http://127.0.0.1:8000/api/artist/${call}`);
@@ -14,15 +15,15 @@ const callApi = async (call) => {
 
 function Contact() {
 
-    console.log("Got here")
+    const queryClient = useQueryClient()
+
     const { id } = useParams();
-    console.log("Got here too!")
-    const { isLoading, error, data: webData } = useQuery(["webData"], callApi(id))
+    const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {
+        return (await callApi(id))} )
 
     //If the request was valid
 
     if (isLoading) {
-        console.log("Loading!")
         return (
             <>
                 <h4> Loading! </h4>
@@ -30,34 +31,26 @@ function Contact() {
         )
     }
 
-    if (error) {
-        console.log(error)
+    if (isError) {
         return (
             <>
-                <h4> A </h4>
+                <h4> {error.message} </h4>
             </>
         )
     }
     
-    if (webData) {
-        console.log(webData)
-        if (webData["success"]) {
-            return (
-                    <div className="center content">
-                        <MainArtist artist={webData["original"]} />
-                        {webData['related'].map(anyArtist => {
-                            return (
-                                <RelatedArtist artist={anyArtist} keyProp={anyArtist["id"]} />
-                                )
-                            })
-                        }
-                    </div>
+    if (data["success"] === true) {
+    return (
+            <div className=''>
+                <AnyArtist artist={data["original"]}/>
+                {data['related'].map(anyArtist => {
+                    return ( <AnyArtist artist={anyArtist} keyProp={anyArtist["id"]} />) } 
+                    ) 
+                }
+            </div>
             ) }
-        else {
-            return ( <div> <h3>{webData["error"]}</h3> </div> ) } }
-    else {
-        console.log("Something")
-        return ( <div> <h3>No search has been made yet!</h3> </div> ) } }
+}
+
 
 
 export default Contact

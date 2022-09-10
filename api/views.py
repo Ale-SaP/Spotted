@@ -1,4 +1,3 @@
-from urllib import response
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -48,7 +47,7 @@ def returnRelatedArtists(artistId):
     return(relatedArtists)
 
 def conditions(arg):
-    if ( (len(arg) >= 25 or len(arg) <= 4)):
+    if ( (len(arg) >= 25 or len(arg) <= 5)):
         return False
     else: 
         return True
