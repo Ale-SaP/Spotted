@@ -31,8 +31,8 @@ function App() {
                     < TextScreen 
                     title={"Welcome to Spotted!"}
                     text={"Look for an artist you know and find related ones! What are you waiting for?"}/> 
-                    </>
-                } /> 
+                  </>
+                } />
 
                 <Route path="*" element={
                   <>
@@ -43,11 +43,7 @@ function App() {
                   </>
                 } />
 
-                <Route path='/search/:id' element={
-                  <>
-                    < NavBar />
-                    < Contact />
-                  </>}  />
+                <Route path='/search/:id' element={ <> < NavBar /> < Contact /> </>}  />
             </Route>
           </Routes>
         </BrowserRouter >

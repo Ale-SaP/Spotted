@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 //Components
-import MainArtist from "./MainArtist"
-import RelatedArtist from "./RelatedArtists";
 import AnyArtist from './AnyArtist';
 
 const callApi = async (call) => {
@@ -25,24 +23,17 @@ function Contact() {
 
     if (isLoading) {
         return (
-            <>
-                <h4> Loading! </h4>
-            </>
-        )
-    }
+            <> <h4> Loading! </h4> </> ) }
 
     if (isError) {
-        return (
-            <>
-                <h4> {error.message} </h4>
-            </>
-        )
-    }
+        return ( 
+            <> <h4> {error.message} </h4> </> ) }
     
     if (data["success"] === true) {
-    return (
-            <div className=''>
+        return (
+            <div>
                 <AnyArtist artist={data["original"]}/>
+
                 {data['related'].map(anyArtist => {
                     return ( <AnyArtist artist={anyArtist} keyProp={anyArtist["id"]} />) } 
                     ) 
