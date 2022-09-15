@@ -13,7 +13,7 @@ function SearchBar( ) {
     };
 
     const handleSubmit = (e) => {
-        navigate("/search/"+searchTerm)
+        navigate("/search/artist"+searchTerm)
     }
 
     console.log("search bar loaded!")

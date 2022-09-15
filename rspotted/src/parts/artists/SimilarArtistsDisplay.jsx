@@ -1,23 +1,18 @@
 //Main imports
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 //Components
 import AnyArtist from './AnyArtist';
+import TextScreen from '../TextScreen';
+import { callApi } from '../../utils/methods';
 
-const callApi = async (call) => {
-    const dataFromApi = await axios.get(`http://127.0.0.1:8000/api/artist/${call}`);
-    return dataFromApi.data
-}
-
-function Contact() {
+function SimilarArtistsDisplay() {
 
     const queryClient = useQueryClient()
 
     const { id } = useParams();
-    const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {
-        return (await callApi(id))} )
+    const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {return (await callApi(id))} )
 
     //If the request was valid
 
@@ -40,8 +35,12 @@ function Contact() {
                 }
             </div>
             ) }
+    else {
+        return ( <TextScreen title={"Whoops! The request was not valid."}
+         text={"Perhaps the id was not valid or the playlist was not public."}/> )
+    }
 }
 
 
 
-export default Contact
+export default SimilarArtistsDisplay

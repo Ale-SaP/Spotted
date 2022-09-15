@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React from 'react';
 
 //Components
-import Contact from './parts/Contact';
+import SimilarArtistsDisplay from './parts/artists/SimilarArtistsDisplay';
 import NavBar from './parts/NavBar';
 import TextScreen from './parts/TextScreen';
 
@@ -23,14 +23,14 @@ function App() {
     <QueryClientProvider client={queryClient}>
         <BrowserRouter >
           <Routes>
-            <Route path='*' element={ <Navigate to="/home" /> }/>
+            <Route path='*'/>
             <Route path="/">
                 <Route index path="home" element={
                   <>
                     <NavBar />
                     < TextScreen 
                     title={"Welcome to Spotted!"}
-                    text={"Look for an artist you know and find related ones! What are you waiting for?"}/> 
+                    text={"Look for playlists and compare/export them or search an artist you know and find related ones!"}/> 
                   </>
                 } />
 
@@ -43,7 +43,8 @@ function App() {
                   </>
                 } />
 
-                <Route path='/search/:id' element={ <> < NavBar /> < Contact /> </>}  />
+                <Route path='/search/artist/:id' element={ <> < NavBar /> < SimilarArtistsDisplay /> </>}  />
+                <Route path='/search/playlist/:id' element={ <> < NavBar /> </>}  />
             </Route>
           </Routes>
         </BrowserRouter >
