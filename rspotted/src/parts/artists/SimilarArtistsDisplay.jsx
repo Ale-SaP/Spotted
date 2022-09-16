@@ -5,14 +5,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 //Components
 import AnyArtist from './AnyArtist';
 import TextScreen from '../TextScreen';
-import { callApi } from '../../utils/methods';
+import { callArtist } from '../../utils/methods';
 
 function SimilarArtistsDisplay() {
 
     const queryClient = useQueryClient()
 
     const { id } = useParams();
-    const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {return (await callApi(id))} )
+    const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {return (await callArtist(id))} )
 
     //If the request was valid
 

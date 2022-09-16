@@ -7,7 +7,7 @@ class Analysis():
     
     def sanitization(self):
         cleanData = bleach.clean(text = (self.data), strip = True, strip_comments = True)
-        cleanData = cleanData.strip()
+        cleanData = cleanData.strip(" ")
         if ( len(cleanData) < 60):
-            return (True, self.stripLink(cleanData))
+            return (True, (cleanData))
         else: return (False, "")

@@ -32,4 +32,4 @@ def getPlaylist(request, playlistId):
     sanitizedData = sanitizedData.sanitization()
     #More sanitization needs to be done on the front end; to transform links to ids.
     if (sanitizedData[0]):
-        return Response({"respuesta": returnPlaylist(sanitizedData[1], spotify)})
+        return Response({"tracks": returnPlaylist(sanitizedData[1], spotify), "success":True})

@@ -4,9 +4,10 @@ import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React from 'react';
 
 //Components
-import SimilarArtistsDisplay from './parts/artists/SimilarArtistsDisplay';
 import NavBar from './parts/NavBar';
 import TextScreen from './parts/TextScreen';
+import Homepage from './parts/Homepage';
+import SearchPath from './parts/SearchPath.jsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,29 +24,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
         <BrowserRouter >
           <Routes>
-            <Route path='*'/>
-            <Route path="/">
-                <Route index path="home" element={
-                  <>
-                    <NavBar />
-                    < TextScreen 
-                    title={"Welcome to Spotted!"}
-                    text={"Look for playlists and compare/export them or search an artist you know and find related ones!"}/> 
-                  </>
-                } />
+            
+          <Route path="" element={<> <NavBar /> <Homepage/> </>} />
+          <Route path='*' element={<> <NavBar /> <TextScreen title="404" text="Missing Page!"/> </>} />
+            
+          <Route path="/">
+            <Route path="home" element={<> <NavBar/> <Homepage/> </>} />
+            <Route path='search/*' element={ <> <SearchPath/> </>} />
+          </Route>
 
-                <Route path="*" element={
-                  <>
-                    <NavBar />
-                    < TextScreen 
-                    title={"Whoops!"}
-                    text={"An error occurred, was it on us?"}/>
-                  </>
-                } />
-
-                <Route path='/search/artist/:id' element={ <> < NavBar /> < SimilarArtistsDisplay /> </>}  />
-                <Route path='/search/playlist/:id' element={ <> < NavBar /> </>}  />
-            </Route>
           </Routes>
         </BrowserRouter >
       </QueryClientProvider>

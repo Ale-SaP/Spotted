@@ -1,8 +1,7 @@
 import { useState } from 'react';
-
 import {useNavigate} from 'react-router-dom'
-
-function SearchBar( ) {
+ 
+function SearchBar( { direction } ) {
 
     const [searchTerm, setSearch] = useState('');
     const navigate = useNavigate()
@@ -13,14 +12,13 @@ function SearchBar( ) {
     };
 
     const handleSubmit = (e) => {
-        navigate("/search/artist"+searchTerm)
+        navigate("/search/" + direction + "/" + searchTerm)
     }
 
-    console.log("search bar loaded!")
     return (
         <div className="form-control">
             <div className="input-group">
-                <form method="GET" className="center" onSubmit={handleSubmit} >
+                <form method="GET" onSubmit={handleSubmit} >
                     <input id="artist-search" type="text" name="" placeholder="search here..."
                         className='input input-bordered'
                         value={searchTerm} onChange={handleChange} />
