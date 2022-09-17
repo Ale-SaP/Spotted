@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
- 
+
 function SearchBar( { direction } ) {
 
     const [searchTerm, setSearch] = useState('');
