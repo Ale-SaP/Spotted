@@ -11,7 +11,7 @@ import FilterBar from './FilterBar';
 function PlaylistDisplay() {
     
     const queryClient = useQueryClient()
-    const { id, filter } = useParams();
+    const { id, filter, term} = useParams();
     const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {return (await callPlaylist(id))} )
 
     if (isLoading) {
@@ -26,7 +26,7 @@ function PlaylistDisplay() {
         return (
         <>
         <FilterBar />
-        <PlaylistTable data={data["tracks"]} sort={filter} /> 
+        <PlaylistTable data={data["tracks"]} filterProp={filter} termProp={term} /> 
         </>)
     }
     else{ return ( <TextScreen title={"Whoops! The request was not valid."}

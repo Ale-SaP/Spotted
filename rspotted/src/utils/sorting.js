@@ -25,8 +25,20 @@ function Sort (listOfObjects, sort, param) {
         return (SortByIndex(listOfObjects)).reverse() }
 }
 
+function CheckIfIsResult(object, term) {
+    const objectName = (object["trackName"]).toUpperCase()
+    return (objectName !== (objectName.replace(term.toUpperCase(), "")))
+}
 
-export function SortForPlaylist(listOfObjects, sort) {
-    const sortedTracks = Sort(listOfObjects, sort, "trackName")
-    return sortedTracks
+export function SortForPlaylist(listOfObjects, sort, term) {
+    if (term) {
+        return SortForPlaylistSearch(listOfObjects, sort, term)}
+    else if (sort) {
+        return Sort(listOfObjects, sort, "trackName") }
+    else {return listOfObjects}
+}
+
+function SortForPlaylistSearch(listOfObjects, sort, term) {
+    const filtered = listOfObjects.filter(object => CheckIfIsResult(object, term))
+    return Sort(filtered, sort, "trackName")
 }

@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import { useState } from "react"
+import { useParams } from "react-router";
 import { SortForPlaylist } from '../../utils/sorting';
 
 const tableHeaders = () => {
     return(
     <tr>
         <th></th>
-        <th>Track Name</th> 
+        <th>Track Name</th>
         <th>Artist</th> 
         <th>Album</th> 
         <th>Release Date</th> 
@@ -31,8 +33,14 @@ const characterClip = (string) => {
     else {return string}
 }
 
-function PlaylistTable({data, sort}) {
-    const [sortedData, setSortedData] = useState((SortForPlaylist(data, sort)))
+function PlaylistTable({data, filterProp, termProp}) {
+
+    const { filter, term} = useParams()
+    const [sortedData, setSortedData] = useState( SortForPlaylist(data, filterProp, termProp) )
+    
+    useEffect( () => {
+        setSortedData( (SortForPlaylist(data, filter, term)) )
+    }, [filter, term])
 
     return (    
             <>
