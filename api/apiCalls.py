@@ -31,10 +31,24 @@ def returnRelatedArtists(artistId, spotify):
     return(relatedArtists)
 
 def returnPlaylist(playlistId, spotify):
-    playlistData = spotify.playlist(playlistId, {"tracks"})
-    playlistSongs = []
+
+    playlistData = spotify.playlist_tracks(playlistId)   
+    nextSearch = playlistData["next"]
+    nextData = playlistData
+    iterations = 0
+
+    while (nextSearch and (iterations < 10)):
+        print("request")
+        iterations += 1
+        nextData = (spotify.next(nextData))
+        nextSearch = nextData["next"]
+        for track in nextData["items"]:
+            playlistData["items"].append(track)
+
     index = 0
-    for track in playlistData["tracks"]["items"]:
+    playlistSongs = []
+
+    for track in playlistData["items"]:
         track = track["track"]
         index += 1
         selectedData = {
@@ -45,4 +59,4 @@ def returnPlaylist(playlistId, spotify):
         "artistLink": track["artists"][0]["external_urls"]["spotify"],
         "albumName":track["album"]["name"], "releaseDate": (track["album"]["release_date"])}
         playlistSongs.append(selectedData)
-    return playlistSongs
+    return (playlistSongs)

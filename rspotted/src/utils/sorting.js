@@ -6,28 +6,52 @@ function SortAlphabeticallyInverse(list, param) {
     return (list.sort((a,b) => a[param] < b[param] ? 1 : -1))
 }
 
-function SortByIndex(list) {
-    return (list.sort((a,b) => a["index"] > b["index"] ? 1 : -1))
+function SortByIndex(list, param) {
+    return (list.sort((a,b) => a[param] > b[param] ? 1 : -1))
 }
 
 function Sort (listOfObjects, sort, param) {
 
-    if (sort === "A-to-Z") { 
+    if (sort === "Tracks-A-to-Z") { 
         return (SortAlphabetically(listOfObjects, param)) }
 
-    else if (sort === "Z-to-A") {
+    else if (sort === "Tracks-Z-to-A") {
         return (SortAlphabeticallyInverse(listOfObjects, param)) }
 
+    else if (sort === "Artist-A-to-Z") { 
+        return (SortAlphabetically(listOfObjects, "artistName")) }
+    
+    else if (sort === "Artist-Z-to-A") {
+        return (SortAlphabeticallyInverse(listOfObjects, "artistName")) }
+
     else if (sort === "Index") {
-        return SortByIndex(listOfObjects) }
+        return SortByIndex(listOfObjects, "index") }
 
     else if (sort === "Inverse-Index") {
-        return (SortByIndex(listOfObjects)).reverse() }
+        return (SortByIndex(listOfObjects, "index")).reverse() }
+
+    else if (sort === "Release-Date-") {
+        return SortByIndex(listOfObjects, "releaseDate") }
+    
+    else if (sort === "Release-Date+") {
+        return (SortByIndex(listOfObjects, "releaseDate")).reverse() }
+    else {return listOfObjects}
 }
 
 function CheckIfIsResult(object, term) {
+    const objectArtist = (object["artistName"]).toUpperCase()
+    const artistCheck = (objectArtist !== (objectArtist.replace(term.toUpperCase(), "")))
+
     const objectName = (object["trackName"]).toUpperCase()
-    return (objectName !== (objectName.replace(term.toUpperCase(), "")))
+    const nameCheck = (objectName !== (objectName.replace(term.toUpperCase(), "")))
+
+    const objectDate = (object["releaseDate"]).toUpperCase()
+    const dateCheck = (objectDate !== (objectDate.replace(term.toUpperCase(), "")))
+
+    const objectAlbum= (object["albumName"]).toUpperCase()
+    const albumCheck = (objectAlbum !== (objectAlbum.replace(term.toUpperCase(), "")))
+
+    return (artistCheck || nameCheck || dateCheck || albumCheck)
 }
 
 export function SortForPlaylist(listOfObjects, sort, term) {

@@ -13,16 +13,16 @@ const FilterSearchBar = () => {
     const handleChange = (e) => {
         e.preventDefault()
         setSearch(e.target.value)
-        if (filter) { navigate("/search/playlist/" + id + "/" + filter + "/Search/" + e.target.value) }
-        else { navigate("/search/playlist/" + id + "/Index/Search/" + e.target.value) }
+        if (filter) { navigate("/playlist/" + id + "/" + filter + "/" + e.target.value) }
+        else { navigate("/playlist/" + id + "/Index/" + e.target.value) }
     }
 
     return (
-        <div className="form-control">
-            <div className="input-group container">
+        <div className="">
+            <div className="container">
                 <form method="GET" >
                     <input id="artist-search" type="text" name="" placeholder="Filter the songs!"
-                        className='input input-bordered'
+                        className="input input-bordered input-md w-full max-w-xs"  
                         value={searchTerm} onChange={ e => handleChange(e)} onSubmit={ e => handleChange(e)} />
                 </form>
             </div>

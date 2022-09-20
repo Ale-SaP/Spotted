@@ -16,16 +16,15 @@ const NavBar = ( { show, direction } ) => {
 
         <div className="flex-2">
             <a className="btn btn-ghost normal-case text-x" style={{color:"whitesmoke"}} 
-            onClick={() => {return <Navigate to={"search/artist"}/>}} href={"http://localhost:3000/search/artist"}>
+            onClick={() => {return <Navigate to={"/artist"}/>}} href={"http://localhost:3000/artist"}>
                 Related Artists
             </a>
             <a className="btn btn-ghost normal-case text-x" style={{color:"whitesmoke"}} 
-            onClick={() => {return <Navigate to={"search/artist"}/>}} href={"http://localhost:3000/search/playlist"}>
+            onClick={() => {return <Navigate to={"/artist"}/>}} href={"http://localhost:3000/playlist"}>
                 Playlists
             </a>
         </div>
         
-        <div className="flex-3"><SearchBar show={show} direction={direction}/></div>
     </div>
 ) } }
 

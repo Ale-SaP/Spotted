@@ -12,7 +12,7 @@ function SearchBar( { direction } ) {
     };
 
     const handleSubmit = (e) => {
-        navigate("/search/" + direction + "/" + searchTerm)
+        navigate("/" + direction + "/" + searchTerm)
     }
 
     return (
