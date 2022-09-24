@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 /* Basic elements */
+.navbar {
+  background-color: #000000;
+}
 
 body {
   background: #121212;
+    height: 100vh;
+    width: 100vw;
 }
 
 /* Icon and search bar */

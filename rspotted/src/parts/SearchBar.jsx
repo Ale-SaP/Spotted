@@ -17,12 +17,12 @@ function SearchBar( { direction } ) {
 
     return (
         <div className="form-control">
-            <div className="input-group">
+            <div className="input-group input-group-lg container distance">
                 <form method="GET" onSubmit={handleSubmit} >
-                    <input id="artist-search" type="text" name="" placeholder="search here..."
-                        className='input input-bordered'
+                    <input id="artist-search" type="text" name="" placeholder="Search here..."
+                        className='input input-bordered input-lg primary-content'
                         value={searchTerm} onChange={handleChange} />
-                    <input className="btn btn-square" type="submit" value="OK" />
+                    <input className="btn input-lg" type="submit" value="OK" />
                 </form>
             </div>
         </div>

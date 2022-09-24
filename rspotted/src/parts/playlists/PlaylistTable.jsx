@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react"
 import { useParams } from "react-router";
 import { SortForPlaylist } from '../../utils/sorting';
+import { useNavigate } from "react-router";
 
 const tableHeaders = () => {
     return(
@@ -11,19 +12,17 @@ const tableHeaders = () => {
         <th>Artist</th> 
         <th>Album</th> 
         <th>Release Date</th> 
-        <th>Spotify Link</th> 
     </tr>
 ) }
 
-const tableRow = (track) => {
+const tableRow = (track, navigate) => {
     return (
         <tr key={track.id}>
             <th>{ characterClip(track.index) }</th> 
-            <td>{ characterClip(track.trackName) }</td> 
+            <td >{ characterClip(track.trackName) }</td> 
             <td>{ characterClip(track.artistName) }</td> 
             <td>{ characterClip(track.albumName) }</td> 
             <td>{( characterClip(track.releaseDate) ).split("-")[0]}</td> 
-            <td href={track.trackLink} target="_blank">{track.id}</td> 
         </tr>
     )
 }
@@ -33,16 +32,33 @@ const characterClip = (string) => {
     else {return string}
 }
 
+const pagination = (listOfObjects, limit) => {
+    let list = []
+    if ( (listOfObjects.length) > limit) {
+        for (let i = 0; i < ((limit * listOfObjects.length)/10000); i ++) {
+            let iteration = listOfObjects.slice((i*limit), (i*limit + limit))
+            list.push( iteration )
+        }
+        return list.map( panel => { return (
+            panel.map( track => {return (tableRow(track))}) )
+        } )
+        
+    }
+    else {
+        return listOfObjects.map( track => tableRow(track))}
+}
+
 function PlaylistTable({data, filterProp, termProp}) {
 
     const { filter, term} = useParams()
     const [sortedData, setSortedData] = useState( SortForPlaylist(data, filterProp, termProp) )
+    const navigate = useNavigate()
     
     useEffect( () => {
         setSortedData( (SortForPlaylist(data, filter, term)) )
     }, [filter, term])
 
-    return (    
+    return (
             <>
             <div className="overflow-x-auto container distance">
                 <table className="table table-compact w-4/5">
@@ -50,7 +66,7 @@ function PlaylistTable({data, filterProp, termProp}) {
                         {tableHeaders()}
                     </thead> 
                     <tbody>
-                        {sortedData.map(track => tableRow(track))}
+                        {pagination(sortedData, 100)}
                     </tbody>
                 </table>
             </div>

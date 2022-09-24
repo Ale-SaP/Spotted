@@ -3,6 +3,7 @@ import NavBar from "./NavBar"
 import {Route, Routes } from "react-router"
 import TextScreen from "./TextScreen"
 import PlaylistDisplay from "./playlists/PlaylistDisplay"
+import SearchBar from "./SearchBar"
 
 const Paths = () => { 
     return (
@@ -14,10 +15,30 @@ const Paths = () => {
                 </Route>
 
                 <Route path="/playlist">
-                    <Route path='' element={ <> <NavBar direction={"playlist"} /> <TextScreen title="Make a search!"/> </>} />
-                    <Route path=':id' element={ <> <NavBar direction={"playlist"} /> <PlaylistDisplay/></>} />
-                    <Route path=':id/:filter' element={ <> <NavBar direction={"playlist"} /> <PlaylistDisplay/></>} />
-                    <Route path=':id/:filter/:term' element={ <> <NavBar direction={"playlist"} /> <PlaylistDisplay/></>} />
+                    <Route path='' element={ 
+                        <> 
+                            <NavBar direction={"playlist"} /> 
+                            <TextScreen title="Make a search!"/>  
+                            <div className="container"><SearchBar direction="playlist"/></div> 
+                        </>} />
+
+                    <Route path=':id' element={ 
+                    <> 
+                        <NavBar direction={"playlist"} /> 
+                        <PlaylistDisplay/>
+                    </>} />
+
+                    <Route path=':id/:filter' element={ 
+                    <> 
+                        <NavBar direction={"playlist"} /> 
+                        <PlaylistDisplay/>
+                    </>} />
+
+                    <Route path=':id/:filter/:term' element={ 
+                    <> 
+                        <NavBar direction={"playlist"} /> 
+                        <PlaylistDisplay/>
+                    </>} />
                 </Route>
             </Route>
 
