@@ -21,7 +21,6 @@ body {
 /* Just centers any element. */
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
