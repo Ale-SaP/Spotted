@@ -40,26 +40,81 @@ const pagination = (listOfObjects, limit) => {
         let iteration = listOfObjects.slice((i*limit), (i*limit + limit))
         list.push( iteration )
     }
+    while (list[list.length - 1].length !== limit) {
+        list[list.length - 1].push({
+            "index": "...",
+            "trackName": "..." , "trackApiLink":"...", "trackLink":"...",
+            "artistName": "...","artistId": "...", 
+            "artistApiLink": "...",
+            "artistLink": "...",
+            "albumName":"...", "releaseDate": "...",})
+    }
     return list
 }
 
 //Renders a carousel, made up of multiple slides. This should not render if the ammount of tracks is under the limit.
 //Also, the render works this way:  Carousel Buttons => for each slide in listOfObjects, render a button
 //                                  Carousel => for each list in listOfObjects => for each track in list => tableRow(track)
-const carousel = (listOfObjects) => {
-    
+const Carousel = (listOfObjects) => {
+    const { filter} = useParams()
+    const CarouselButtons = (filter) => {
+        
+        if ( (filter ==="Inverse-Index") || (filter === "Index") ) {
+            return (
+                <div className="flex justify-center w-full py-2 gap-2">
+                    {listOfObjects.map( list => {
+                        return (
+                        <>
+                            <a href={"#" + list[0]["index"]} className="btn btn-xs">{ `${list[0]["index"]} to ${list[list.length - 1]["index"]}`}</a>
+                        </> 
+                    )})}
+                </div>
+            )
+        }
+
+        else if ( (filter ==="Tracks-A-to-Z") || (filter === "Tracks-Z-to-A") ) {
+            return (
+                <div className="flex justify-center w-full py-2 gap-2">
+                    {listOfObjects.map( list => { return (
+                        <>
+                            <a href={"#" + list[0]["index"]} className="btn btn-xs">{ `${list[0]["trackName"][0]} to ${list[list.length - 1]["trackName"][0]}`}</a>
+                        </> 
+                    )})}
+                </div>
+            )
+        }
+
+        else if ( (filter ==="Artist-A-to-Z") || (filter === "Artist-Z-to-A") ) {
+            return (
+                <div className="flex justify-center w-full py-2 gap-2">
+                    {listOfObjects.map( list => { return (
+                        <>
+                            <a href={"#" + list[0]["index"]} className="btn btn-xs">{ `${list[0]["artistName"][0]} to ${list[list.length - 1]["artistName"][0]}`}</a>
+                        </> 
+                    )})}
+                </div>
+            )
+        }
+
+        else if ( (filter ==="Release-Date+") || (filter === "Release-Date-") ) {
+            return (
+                <div className="flex justify-center w-full py-2 gap-2">
+                    {listOfObjects.map( list => { return (
+                        <>
+                            <a href={"#" + list[0]["index"]} className="btn btn-xs">{ `${list[0]["releaseDate"].slice(0,4)} to ${list[list.length - 1]["releaseDate"].slice(0, 4)}`}</a>
+                        </> 
+                    )})}
+                </div>
+            )
+        }
+    }
+
     return (
-        <>
-        <div className="flex justify-center w-full py-2 gap-2">
-            {listOfObjects.map( list => { return (
-                <>
-                    <a href={"#" + list[0]["index"]} className="btn btn-xs">{ `${list[0]["index"]} to ${list[list.length - 1]["index"]}`}</a>
-                </> 
-            )})}
-        </div>
-        <div className="carousel w-full">
+        <div className="overflow-x-auto distance">
+            {CarouselButtons(filter)}
+            <div className="carousel w-full">
                 {listOfObjects.map( list => { return (
-                    <div id={list[0]["index"]} className="carousel-item w-full container">
+                    <div id={list[0]["index"]} className="carousel-item container">
                         <table className="table table-compact w-4/5">
                             <thead>
                                 {tableHeaders()}
@@ -70,15 +125,15 @@ const carousel = (listOfObjects) => {
                         </table>
                     </div>
                 )} )}
+            </div>
         </div>
-        </>
     )
 }
 
 const checkIfPaginationNeeded = (listOfObjects, limit) => {
     if (listOfObjects.length > limit) {
         const paginatedList = pagination(listOfObjects, limit)
-        return carousel(paginatedList)
+        return Carousel(paginatedList)
     }
 
     else {
@@ -108,7 +163,7 @@ function PlaylistTable({data, filterProp, termProp}) {
 
     return (
             <>
-                <div className="overflow-x-auto distance">
+                <div>
                     {checkIfPaginationNeeded(sortedData, 25)}
                 </div>
             </>)
