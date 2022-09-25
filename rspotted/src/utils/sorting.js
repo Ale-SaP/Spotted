@@ -1,22 +1,22 @@
 function SortAlphabetically(list, param) {
-    return (list.sort((a,b) => a[param] > b[param] ? 1 : -1))
+    return (list.sort((a,b) => (a[param].toUpperCase() > b[param].toUpperCase()) ? 1 : -1))
 }
 
 function SortAlphabeticallyInverse(list, param) {
-    return (list.sort((a,b) => a[param] < b[param] ? 1 : -1))
+    return (list.sort((a,b) => (a[param].toUpperCase()) < (b[param].toUpperCase()) ? 1 : -1))
 }
 
 function SortByIndex(list, param) {
     return (list.sort((a,b) => a[param] > b[param] ? 1 : -1))
 }
 
-function Sort (listOfObjects, sort, param) {
+function Sort (listOfObjects, sort) {
 
     if (sort === "Tracks-A-to-Z") { 
-        return (SortAlphabetically(listOfObjects, param)) }
+        return (SortAlphabetically(listOfObjects, "trackName")) }
 
     else if (sort === "Tracks-Z-to-A") {
-        return (SortAlphabeticallyInverse(listOfObjects, param)) }
+        return (SortAlphabeticallyInverse(listOfObjects, "trackName")) }
 
     else if (sort === "Artist-A-to-Z") { 
         return (SortAlphabetically(listOfObjects, "artistName")) }
@@ -54,15 +54,15 @@ function CheckIfIsResult(object, term) {
     return (artistCheck || nameCheck || dateCheck || albumCheck)
 }
 
+function SortForPlaylistSearch(listOfObjects, sort, term) {
+    const filtered = listOfObjects.filter(object => CheckIfIsResult(object, term))
+    return Sort(filtered, sort)
+}
+
 export function SortForPlaylist(listOfObjects, sort, term) {
     if (term) {
         return SortForPlaylistSearch(listOfObjects, sort, term)}
     else if (sort) {
-        return Sort(listOfObjects, sort, "trackName") }
+        return Sort(listOfObjects, sort) }
     else {return listOfObjects}
-}
-
-function SortForPlaylistSearch(listOfObjects, sort, term) {
-    const filtered = listOfObjects.filter(object => CheckIfIsResult(object, term))
-    return Sort(filtered, sort, "trackName")
 }
