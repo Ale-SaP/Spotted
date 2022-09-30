@@ -61,7 +61,7 @@ const CarouselButtons = (listOfObjects, filter) => {
 }
 
 
-const Carousel = (listOfObjects) => {
+const Carousel = ( {listOfObjects} ) => {
     const { filter} = useParams()
     return (
         <div className="overflow-x-auto distance">

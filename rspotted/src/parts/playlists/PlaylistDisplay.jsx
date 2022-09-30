@@ -7,11 +7,12 @@ import TextScreen from '../TextScreen';
 import { callPlaylist } from '../../utils/methods';
 import PlaylistTable from './PlaylistTable';
 import FilterBar from './FilterBar';
+import FilterSearchBar from './FilterSearchBar';
 import SearchBar from '../SearchBar'
 
 function PlaylistDisplay() {
     
-    const { id, filter, term} = useParams();
+    const { id } = useParams();
     const {isLoading, isError, data, error} = useQuery(["webData", id], async () => {return (await callPlaylist(id))} )
 
 
@@ -32,8 +33,9 @@ function PlaylistDisplay() {
         return (
             <div style={{backgroundColor:"#121212"}}>
                 <SearchBar direction="playlist"/>
+                <FilterSearchBar />
                 <FilterBar />
-                <PlaylistTable data={data["tracks"]} filterProp={filter} termProp={term} /> 
+                <PlaylistTable data={data["tracks"]} /> 
             </div>)
     }
     else { 

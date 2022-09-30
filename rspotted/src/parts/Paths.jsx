@@ -15,6 +15,7 @@ const Paths = () => {
                 </Route>
 
                 <Route path="/playlist">
+
                     <Route path='' element={ 
                         <> 
                             <NavBar direction={"playlist"} /> 
@@ -39,6 +40,7 @@ const Paths = () => {
                         <NavBar direction={"playlist"} /> 
                         <PlaylistDisplay/>
                     </>} />
+
                 </Route>
             </Route>
 

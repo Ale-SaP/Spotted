@@ -7,19 +7,20 @@ import { TableRow, TableHeaders } from "./Table";
 import Carousel from "./Carousel";
 import pagination from "../../utils/pagination";
 
-function PlaylistTable({data, filterProp, termProp}) {
+function PlaylistTable({data}) {
 
-    const { filter, term} = useParams()
-    const [sortedData, setSortedData] = useState( SortForPlaylist(data, filterProp, termProp) )
-    const [limit, setLimit] = useState(50)
+    const {filter, term} = useParams()
+    const [sortedData, setSortedData] = useState( SortForPlaylist(data, filter, term) )
     
     useEffect( () => {
         setSortedData( (SortForPlaylist(data, filter, term)) )
     }, [filter, term, data])
 
-    if (sortedData.length > limit) {
-        const paginatedList = pagination(sortedData, limit)
-        return Carousel(paginatedList)
+    if (sortedData.length > 25) {
+        const paginatedList = pagination(sortedData, 25)
+        return (<>
+                    <Carousel listOfObjects={paginatedList} />
+                </>)
     }
 
     else {

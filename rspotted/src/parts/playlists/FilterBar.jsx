@@ -1,6 +1,5 @@
 import { useState } from "react"
 import {useNavigate, useParams} from 'react-router-dom'
-import FilterSearchBar from './FilterSearchBar'
 
 function FilterBar () {
     const navigate = useNavigate()
@@ -40,7 +39,6 @@ function FilterBar () {
             </select>
             <button className="btn">Go</button>
         </div>
-        <FilterSearchBar />
     </div> )
 }
 
