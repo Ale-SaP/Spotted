@@ -11,7 +11,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=env("CLIENT_ID"), 
     client_secret=env("CLIENT_SECRET")))
 #-----
-from .apiCalls import *
+from .AnonymousApiCalls import *
 from .requestSanitizing import Analysis
 #-----
 @api_view(['GET'])

@@ -26,7 +26,7 @@ function SimilarArtistsDisplay() {
     
     if (data["success"] === true) {
         return (
-            <div>
+            <div className=''>
                 <AnyArtist artist={data["original"]}/>
 
                 {data['related'].map(anyArtist => {

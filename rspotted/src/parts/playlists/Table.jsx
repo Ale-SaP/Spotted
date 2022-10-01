@@ -5,9 +5,9 @@ const characterClip = (string) => {
 }
 
 //Returns the table headers, duh
-export const TableHeaders = () => {
+export const TableHeaders = ({id}) => {
     return(
-    <tr>
+    <tr key={id}>
         <th></th>
         <th>Track Name</th>
         <th>Artist</th> 

@@ -31,7 +31,11 @@ function PlaylistTable({data}) {
                 <TableHeaders />
             </thead>
             <tbody>
-                {sortedData.map(track => {return <TableRow track={track} />})}
+                {sortedData.map(track => {return (
+                
+                <TableRow track={track} key={track["id"]}/> 
+                
+                )})}
             </tbody>
         </table>
         </div> 

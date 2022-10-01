@@ -12,6 +12,7 @@ const pagination = (listOfObjects, limit) => {
             "artistName": "...","artistId": "...", 
             "artistApiLink": "...",
             "artistLink": "...",
+            "id": (list[list.length - 1].length),
             "albumName":"...", "releaseDate": "...",})
     }
     return list

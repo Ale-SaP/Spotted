@@ -46,7 +46,7 @@ function AnyArtist({artist}) {
     }
     
     return (
-    <div className="container card distance">
+    <div className="center card distance">
         <div className="card-body">
             <div className="any-artist-text" style={{background:"whitesmoke", color:"black"}}>
                     <h2 href={artist["url"]}> 
