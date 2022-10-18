@@ -1,7 +1,7 @@
 import { useState } from "react"
 
+//Didnt consider it necesary to implement, if needed it can be added but routing must be changed.
 export default function LimitBar( {limit} ) {
-
     const [pickedLimit, setPickedLimit] = useState( () => {
         if (limit) {
             return (limit)}

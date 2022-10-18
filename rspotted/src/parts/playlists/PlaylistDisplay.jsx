@@ -32,10 +32,14 @@ function PlaylistDisplay() {
     if (data["success"] === true) {
         return (
             <div style={{backgroundColor:"#121212"}}>
+                
+                <div className="any-artist-text center" style={{background:"whitesmoke", color:"black"}}>
+                    <h1 className='italic'> {data["name"]}</h1>
+                </div>
                 <SearchBar direction="playlist"/>
                 <FilterSearchBar />
                 <FilterBar />
-                <PlaylistTable data={data["tracks"]} /> 
+                <PlaylistTable data={data["tracks"]} playlistName={data["name"]}/> 
             </div>)
     }
     else { 

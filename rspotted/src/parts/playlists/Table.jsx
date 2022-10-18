@@ -1,6 +1,6 @@
 //Checks if the string is too long
 const characterClip = (string) => {
-    if ( string.length > 50) {return ( (string.slice(0, 50)) + "...")}
+    if ( string.length > 40) {return ( (string.slice(0, 30)) + "...")}
     else {return string}
 }
 

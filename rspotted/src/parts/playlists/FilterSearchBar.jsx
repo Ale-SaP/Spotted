@@ -18,15 +18,15 @@ const FilterSearchBar = () => {
     }
 
     return (
-        <div className="">
-            <div className="container">
+        <>
+            <div className="center">
                 <form method="GET" >
                     <input id="artist-search" type="text" name="" placeholder="Filter the songs!"
                         className="input input-bordered input-md w-full max-w-xs"  
                         value={searchTerm} onChange={ e => handleChange(e)} onSubmit={ e => handleChange(e)} />
                 </form>
             </div>
-        </div>
+        </>
     )
 }
 

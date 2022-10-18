@@ -25,7 +25,7 @@ function FilterBar () {
 
     return (
     <div className="form-control">
-        <div className="input-group container distance">
+        <div className="input-group center distance">
         <select className="select select-bordered w-full max-w-xs" defaultValue={pickedFilter} onChange={e => onChange(e)} >
                 <option disabled value={pickedFilter}>{pickedFilter}</option>
                 <option value="Index">Index</option>

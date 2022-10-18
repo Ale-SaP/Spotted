@@ -1,23 +1,9 @@
 import { useParams } from "react-router"
-import { TableHeaders, TableRow } from "./Table"
+import { TableHeaders, TableRow } from "./Table"    
 
 const CarouselButtons = ({listOfObjects, filter}) => {        
-    if ( (filter ==="Inverse-Index") || (filter === "Index") ) {
-        return (
-            <div className="flex justify-center w-full py-2 gap-2">
-                {listOfObjects.map( list => {
-                    return (
-                    <div key={list[0]["id"]}>
-                        <a href={"#" + list[0]["index"]} className="btn btn-xs" key={list[0]["id"]}>
-                            { `${list[0]["index"]} to ${list[list.length - 1]["index"]}`}
-                        </a>
-                    </div> 
-                )})}
-            </div>
-        )
-    }
 
-    else if ( (filter ==="Tracks-A-to-Z") || (filter === "Tracks-Z-to-A") ) {
+    if ( (filter ==="Tracks-A-to-Z") || (filter === "Tracks-Z-to-A") ) {
         return (
             <div className="flex justify-center w-full py-2 gap-2">
                 {listOfObjects.map( list => { return (
@@ -58,17 +44,33 @@ const CarouselButtons = ({listOfObjects, filter}) => {
             </div>
         )
     }
+
+    else {
+        return (
+            <div className="flex justify-center w-full py-2 gap-2">
+                {listOfObjects.map( list => {
+                    return (
+                    <div key={list[0]["id"]}>
+                        <a href={"#" + list[0]["index"]} className="btn btn-xs" key={list[0]["id"]}>
+                            { `${list[0]["index"]} to ${list[list.length - 1]["index"]}`}
+                        </a>
+                    </div> 
+                )})}
+            </div>
+        )
+    }
 }
 
 
 const Carousel = ( {listOfObjects} ) => {
     const { filter} = useParams()
     return (
+        <>
         <div className="overflow-x-auto distance">
             <CarouselButtons listOfObjects={listOfObjects}  filter={filter}/>
             <div className="carousel w-full">
                 {listOfObjects.map( list => { return (
-                    <div id={list[0]["index"]} className="carousel-item container" key={list[0]["id"]}>
+                    <div id={list[0]["index"]} className="carousel-item container distance" key={list[0]["id"]}>
                         <table className="table table-compact w-4/5">
                             <thead>
                                 <TableHeaders key={list[0]["id"]}/>
@@ -81,6 +83,7 @@ const Carousel = ( {listOfObjects} ) => {
                 )} )}
             </div>
         </div>
+        </>
     )
 }
 
