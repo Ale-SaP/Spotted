@@ -56,8 +56,8 @@ def returnPlaylist(playlistId, spotify):
         selectedData = {
         "index": index,
         "trackName": track["name"], "id":track["id"] , "trackApiLink":track["href"], "trackLink":track["external_urls"]["spotify"],
-        "artistName": track["artists"][0]["name"],"artistId": track["artists"][0]["id"], 
-        "artistApiLink": track["artists"][0]["href"], "trackLink":track["external_urls"]["spotify"],
+        "artistName": track["artists"][0]["name"], "artistId": track["artists"][0]["id"], 
+        "artistApiLink": track["artists"][0]["href"],
         "artistLink": track["artists"][0]["external_urls"]["spotify"],
         "albumName":track["album"]["name"], "releaseDate": (track["album"]["release_date"])}
         playlistSongs.append(selectedData)
