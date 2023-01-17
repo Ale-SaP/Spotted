@@ -1,4 +1,3 @@
-from asyncio.events import BaseDefaultEventLoopPolicy
 import os
 
 import environ
@@ -46,9 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'display',
     'rest_framework',
-
     'corsheaders',
 ]
 
