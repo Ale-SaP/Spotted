@@ -5,6 +5,23 @@ Find related artists and view, filter and export your playlists!
 Built with the Spotify API with no comercial use in mind.
 
 
+## Features
+### Related artists
+
+* Based upon the *Related artists* slide in every artist's page, the idea was to provide an easy way to find similar artists and listen to a preview of their tracks.
+
+* In the react website, if you navigate to _localhost3000/artist_ and paste the Spotify ID of any artist in the search bar, you'll be able to listen to previews of 5 similar artists's top 5 listened tracks.
+
+<br>
+
+### Playlists
+
+* Playlists are the biggest way to listen to music currenty, but we cannot export them to any other service or simply log them.
+
+* In the react website, if you navigate to _localhost3000/playlist_ and paste the Spotify link or ID of any public playlist in the search bar, you'll be able to search for songs in that playlist, order them based on name, artist, release date or position in the playlist and download the playlist as a excel file.
+
+<br><br>
+
 ## Django and React
 
 ### Django
@@ -193,7 +210,62 @@ In the **src** folder we can find:
 
 <br><br>
 
+#### Utils
+
+* the utils folder contains the following files:
+```
+methods.js
+pagination.js
+sorting.js
+```
+
+##### methods.js
+Exports the functions **CallArtist** and **CallPlaylist**, used to access the Django API.
+
+##### pagination.js
+Exports the **pagination** function, that turns an array of objects into multiple arrays of a given lenght; in case the last array is not as long as the limit given, it is filled with placeholder elements.
+
+##### sorting.js
+Exports the **SortForPlaylist** function, that can sort an array of objects over different parameters and filter results.
+
+<br><br>
+
+#### Redux
+* The contents of the *redux* are not in use in the current version.
+
 #### Parts
+
+##### parts/Homepage.jsx
+Renders a placeholder homepage.
+
+##### parts/NavBar.jsx
+Renders a navigation bar.
+
+##### parts/TextScreen.jsx
+Renders a placeholder component, just to display a title and text.
+
+##### parts/Paths.jsx
+This file contains the webpage's main routing:
+
+```
+/
+    artist
+        /
+        /:id
+    
+    playlist
+        /
+        /:id
+        /:id/:filter
+        /:id/:filter/:term
+```
+
+The path *artist* renders the **SimilarArtistDisplay** component, from the *parts/artists* folder.
+
+The path *playlist* renders the **PlaylistDisplay** component, from the *parts/playlists* folder.
+
+<br><br>
+
 ##### parts/artists
 In this folder we can find two different files, **AnyArtist.jsx** and **SimilarArtistsDisplay.jsx**.
 
@@ -244,4 +316,10 @@ If this request is successful, it renders **SearchBar, FilterSearchBar, FilterBa
 
     * **ExportButton** renders a button that, when pressed, downloads the playlist as an excel file.
 
-    * **TableHeaders and TableRow** are defined in the **Table.jsx** file.
+    * **TableHeaders and TableRow** are stated in the **Table.jsx** file.
+
+<br><br>
+
+### CSS
+
+The main CSS file is located in *rspotted/src/index.css* and TailwindsCSS was used.
